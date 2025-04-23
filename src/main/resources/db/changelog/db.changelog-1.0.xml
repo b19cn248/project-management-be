@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="1" author="developer">
+        <comment>Create users table</comment>
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reminder_settings" type="varchar(255)"/>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="developer">
+        <comment>Create projects table</comment>
+        <createTable tableName="projects">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_projects_user_id" references="users(id)"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="developer">
+        <comment>Create tasks table</comment>
+        <createTable tableName="tasks">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_tasks_project_id" references="projects(id)"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="developer">
+        <comment>Create meetings table</comment>
+        <createTable tableName="meetings">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="meeting_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="participants" type="text"/>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_meetings_user_id" references="users(id)"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="developer">
+        <comment>Create schedules table</comment>
+        <createTable tableName="schedules">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="schedule_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_time" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="int">
+                <constraints foreignKeyName="fk_schedules_task_id" references="tasks(id)"/>
+            </column>
+            <column name="meeting_id" type="int">
+                <constraints foreignKeyName="fk_schedules_meeting_id" references="meetings(id)"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_schedules_user_id" references="users(id)"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="developer">
+        <comment>Create files table</comment>
+        <createTable tableName="files">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="file_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_path" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_size" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content_type" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="int">
+                <constraints foreignKeyName="fk_files_task_id" references="tasks(id)"/>
+            </column>
+            <column name="project_id" type="int">
+                <constraints foreignKeyName="fk_files_project_id" references="projects(id)"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add indexes -->
+    <changeSet id="7" author="developer">
+        <comment>Add indexes to improve query performance</comment>
+        <createIndex indexName="idx_users_email" tableName="users">
+            <column name="email"/>
+        </createIndex>
+        <createIndex indexName="idx_users_uuid" tableName="users">
+            <column name="uuid"/>
+        </createIndex>
+
+        <createIndex indexName="idx_projects_user_id" tableName="projects">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex indexName="idx_projects_uuid" tableName="projects">
+            <column name="uuid"/>
+        </createIndex>
+
+        <createIndex indexName="idx_tasks_project_id" tableName="tasks">
+            <column name="project_id"/>
+        </createIndex>
+        <createIndex indexName="idx_tasks_uuid" tableName="tasks">
+            <column name="uuid"/>
+        </createIndex>
+
+        <createIndex indexName="idx_meetings_user_id" tableName="meetings">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex indexName="idx_meetings_uuid" tableName="meetings">
+            <column name="uuid"/>
+        </createIndex>
+
+        <createIndex indexName="idx_schedules_task_id" tableName="schedules">
+            <column name="task_id"/>
+        </createIndex>
+        <createIndex indexName="idx_schedules_meeting_id" tableName="schedules">
+            <column name="meeting_id"/>
+        </createIndex>
+        <createIndex indexName="idx_schedules_user_id" tableName="schedules">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex indexName="idx_schedules_uuid" tableName="schedules">
+            <column name="uuid"/>
+        </createIndex>
+
+        <createIndex indexName="idx_files_task_id" tableName="files">
+            <column name="task_id"/>
+        </createIndex>
+        <createIndex indexName="idx_files_project_id" tableName="files">
+            <column name="project_id"/>
+        </createIndex>
+        <createIndex indexName="idx_files_uuid" tableName="files">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- Add check constraints -->
+    <changeSet id="8" author="developer">
+        <comment>Add check constraints to ensure data integrity</comment>
+        <sql>
+            ALTER TABLE tasks
+                ADD CONSTRAINT chk_task_priority CHECK (priority IN ('HIGH', 'MEDIUM', 'LOW'));
+            ALTER TABLE tasks
+                ADD CONSTRAINT chk_task_status CHECK (status IN ('NOT_STARTED', 'IN_PROGRESS', 'COMPLETED'));
+            ALTER TABLE projects
+                ADD CONSTRAINT chk_project_status CHECK (status IN ('IN_PROGRESS', 'COMPLETED', 'ON_HOLD'));
+        </sql>
+    </changeSet>
+</databaseChangeLog>
