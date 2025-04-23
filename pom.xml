@@ -141,19 +141,6 @@
                     <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.4.0</version>
-                <configuration>
-                    <to>
-                        <image>project-management</image>
-                    </to>
-                    <from>
-                        <image>eclipse-temurin:21-jdk</image>
-                    </from>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
