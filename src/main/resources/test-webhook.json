@@ -1,6 +1,7 @@
 {
   "glossary": {
     "title": "example glossary",
+    "motion": "A meta-markup language",
     "GlossDiv": {
       "title": "S",
       "GlossList": {
