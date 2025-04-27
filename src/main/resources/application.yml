@@ -35,7 +35,7 @@ spring:
       max-request-size: 10MB
 
 server:
-  port: 8080
+  port: 8688
   servlet:
     context-path: /api
 
